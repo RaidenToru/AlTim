@@ -5,3 +5,6 @@ def index(request):
 
 def personal(request):
     return render(request, 'personalPage.html')
+
+def map(request):
+    return render(request, 'map.html')
