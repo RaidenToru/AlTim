@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>AlTim</title>
+    <title>{% block title %}AlTim{% endblock %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -53,10 +53,113 @@
             </div>
 	        </ul>
 	      </div>
+
+
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active"><a href="#myModal" data-toggle="modal" class="nav-link">Sign in</a></li>
+          </ul>
+        </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
 
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" >Sign in/<a href="#myModal1" data-toggle="modal">Sign up</a></h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-field">
+              <div class="container">
+              <div class="row">
+                <div class="col-md-5 form-group">
+                  <label for="#">Login</label>
+                  <div class="form-field">
+                    <input type="text" class="form-control" placeholder="Login">
+                  </div>
+                </div>
+                <div class="col-md-5 form-group">
+                  <label for="#">Password</label>
+                  <div class="form-field">
+                    <input type="text" class="form-control" placeholder="Password">
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input href="index.html" type="submit" value="Close" class="form-control btn btn-primary">
+            <input href="index.html" type="submit" value="Ok" class="form-control btn btn-primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" >Sign up</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-field">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-5 form-group">
+                    <label for="#">Name</label>
+                    <div class="form-field">
+                      <input type="text" class="form-control" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="col-md-5 form-group">
+                    <label for="#">Surname</label>
+                    <div class="form-field">
+                      <input type="text" class="form-control" placeholder="Surname">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-5 form-group">
+                    <label for="#">Login</label>
+                    <div class="form-field">
+                      <input type="text" class="form-control" placeholder="Login">
+                    </div>
+                  </div>
+                  <div class="col-md-5 form-group">
+                    <label for="#">Password</label>
+                    <div class="form-field">
+                      <input type="text" class="form-control" placeholder="Password">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-5 form-group">
+                    <label for="#">Phone number</label>
+                    <div class="form-field">
+                      <input type="text" class="form-control" placeholder="+7(***)***-**-**">
+                    </div>
+                  </div>
+                  <div class="col-md-5 form-group">
+                    <label for="#">e-Mail address</label>
+                    <div class="form-field">
+                      <input type="text" class="form-control" placeholder="address0102@gmail.com">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input href="index.html" type="submit" value="Close" class="form-control btn btn-primary">
+            <input href="index.html" type="submit" value="Ok" class="form-control btn btn-primary">
+          </div>
+        </div>
+      </div>
+    </div>
     {% block content %}
 
     {% endblock %}
