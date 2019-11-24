@@ -41,11 +41,11 @@
 
             <div class="btn-group">
               <ul class="navbar nav ml-auto dropdown-toggle" data-toggle="dropdown"style="color:#ffffff">
-                <li class="nav-item" ><a href="" style="color:#ffffff">Ali Baitas</a></li>
+                <li class="nav-item" ><a href="" style="color:#ffffff">{{user.first_name}} {{user.last_name}}</a></li>
               </ul>
 
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="../personal">Profile</a>
+                <a class="dropdown-item" href="../personal/">Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Exit</a>
@@ -58,18 +58,18 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="#myModal" data-toggle="modal" class="nav-link">Sign in</a></li>
+            <li class="nav-item active"><a href="" data-toggle="modal" data-target="#sign-in" class="nav-link">Sign in</a></li>
           </ul>
         </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
 
-    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div id="sign-in" class="modal fade" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" >Sign in/<a href="#myModal1" data-toggle="modal">Sign up</a></h4>
+            <h4 class="modal-title" >Sign in/<a href="" data-target="#sign-up" data-dismiss="modal" data-toggle="modal">Sign up</a></h4>
           </div>
           <div class="modal-body">
             <div class="form-field">
@@ -92,13 +92,13 @@
             </div>
           </div>
           <div class="modal-footer">
-            <input href="index.html" type="submit" value="Close" class="form-control btn btn-primary">
-            <input href="index.html" type="submit" value="Ok" class="form-control btn btn-primary">
+            <button data-dismiss="modal" class="form-control btn btn-primary">Close</button>
+            <button class="form-control btn btn-primary">Ok</button>
           </div>
         </div>
       </div>
     </div>
-    <div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div id="sign-up" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -140,7 +140,7 @@
                   <div class="col-md-5 form-group">
                     <label for="#">Phone number</label>
                     <div class="form-field">
-                      <input type="text" class="form-control" placeholder="+7(***)***-**-**">
+                      <input type="text" class="form-control" placeholder="87*********">
                     </div>
                   </div>
                   <div class="col-md-5 form-group">
@@ -154,8 +154,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <input href="index.html" type="submit" value="Close" class="form-control btn btn-primary">
-            <input href="index.html" type="submit" value="Ok" class="form-control btn btn-primary">
+            <button data-dismiss="modal" class="form-control btn btn-primary">Close</button>
+            <button class="form-control btn btn-primary">Ok</button>
           </div>
         </div>
       </div>
