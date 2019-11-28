@@ -7,6 +7,7 @@ from datetime import datetime
 from django.conf import settings
 
 class Ticket(models.Model):
+    ticket_name=models.CharField(max_length=20)
     is_two_flight=models.BooleanField()
     ticket_buy_date=models.DateTimeField('Date when flight was bought')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
