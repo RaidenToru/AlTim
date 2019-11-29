@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Ticket,Flight
+from .models import Ticket,Flight,SimpleUser
 from Altim.forms import UserRegistrationForm
 from django.views.generic.edit import CreateView
 from django.urls import reverse, reverse_lazy
@@ -15,8 +15,11 @@ def index(request):
     return render(request,'index.html')
 
 def personal(request):
-    latest_flight_list=Ticket.objects.order_by('-ticket_buy_date')
-    return render(request, 'personalPage.html',{'latest_flight_list':latest_flight_list})
+    user_id=1
+    tickets=Ticket.objects.filter(user=SimpleUser.objects.get(pk=user_id))
+    flights=Flight.objects.filter(user=SimpleUser.objects.get(pk=user_id))
+
+    return render(request, 'personalPage.html',{'tickets':tickets, 'flights':flights})
 
 def map(request):
     return render(request, 'map.html')
