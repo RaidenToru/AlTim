@@ -27,7 +27,7 @@ class Flight(models.Model):
         return self.flight_name
 
 class SimpleUser(AbstractUser):
-    userImg = models.ImageField(upload_to='user_avas/')
+    userImg = models.ImageField(upload_to='user_avas/', default='user_avas/person_1.jpg')
     phone=models.CharField('Phone of user',max_length=20)
     date_of_birth=models.DateField('date of birth',auto_now=False, auto_now_add=False,null=True,blank=True)
     group = Group()

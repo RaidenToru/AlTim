@@ -31,36 +31,40 @@
 
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="../">AlTim</a>
+	      <a class="navbar-brand" href="/">AlTim</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
-
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
+        {% block login %}
+        {% if user.is_authenticated %}
+        <div class="collapse navbar-collapse" id="ftco-nav">
+          <ul class="navbar-nav ml-auto">
 
             <div class="btn-group">
               <ul class="navbar nav ml-auto dropdown-toggle" data-toggle="dropdown"style="color:#ffffff">
-                <li class="nav-item" ><a href="" style="color:#ffffff">{{user.first_name}} {{user.last_name}}</a></li>
+                <li class="nav-item"><a href="" style="color:#ffffff">{{user.first_name}} {{user.last_name}}</a></li>
               </ul>
 
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="../personal/">Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Exit</a>
+                <a class="dropdown-item" href="/logout_view/">Exit</a>
               </div>
             </div>
-	        </ul>
-	      </div>
-
+          </ul>
+        </div>
+        {% else %}
 
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="" data-toggle="modal" data-target="#sign-in" class="nav-link">Sign in</a></li>
+            <li class="nav-item active"><a href="/accounts/login" class="nav-link">Sign in</a></li>
+            <li class="nav-item"><a href="/registration"class="nav-link">Sign up</a></li>
           </ul>
         </div>
+        {% endif %}
+        {% endblock  %}
 	    </div>
 	  </nav>
     <!-- END nav -->
@@ -72,34 +76,34 @@
             <h4 class="modal-title" >Sign in/<a href="" data-target="#sign-up" data-dismiss="modal" data-toggle="modal">Sign up</a></h4>
           </div>
           <div class="modal-body">
-            <div class="form-field">
-              <div class="container">
+            <form method="post">
+            <div class="container">
               <div class="row">
-                <div class="col-md-5 form-group">
-                  <label for="#">Login</label>
-                  <div class="form-field">
-                    <input type="text" class="form-control" placeholder="Login">
-                  </div>
-                </div>
-                <div class="col-md-5 form-group">
-                  <label for="#">Password</label>
-                  <div class="form-field">
-                    <input type="text" class="form-control" placeholder="Password">
-                  </div>
-                </div>
+                {% csrf_token %}
+                <p><div class="col-md-5 form-group">
+                  <label for="id_login">Login</label>
+                  <input required id="id_login" name="username" type="text" class="form-control" placeholder="Login">
+                </div></p>
+                <p><div class="col-md-5 form-group">
+                  <label for="id_password">Password</label>
+                  <input required id="id_password" name="password" type="password" class="form-control" placeholder="Password">
+                </div></p>
+                {{ form.login.errors }}
+                {{ form.password.errors }}
               </div>
-            </div>
-            </div>
+              <div class="row">
+            <button data-dismiss="modal" class="form-control btn btn-primary col-md-6">Close</button>
+            <button type="submit" class="form-control btn btn-primary col-md-6">Ok</button>
           </div>
-          <div class="modal-footer">
-            <button data-dismiss="modal" class="form-control btn btn-primary">Close</button>
-            <button class="form-control btn btn-primary">Ok</button>
+          </div>
+          </form>
           </div>
         </div>
       </div>
     </div>
-    <div id="sign-up" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div id="sign-up" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -112,13 +116,13 @@
                   <div class="col-md-5 form-group">
                     <label for="#">Name</label>
                     <div class="form-field">
-                      <input type="text" class="form-control" placeholder="Name">
+                      <input type="{ first_name }" class="form-control" placeholder="Name">
                     </div>
                   </div>
                   <div class="col-md-5 form-group">
                     <label for="#">Surname</label>
                     <div class="form-field">
-                      <input type="text" class="form-control" placeholder="Surname">
+                      <input type="{ last_name }" class="form-control" placeholder="Surname">
                     </div>
                   </div>
                 </div>
@@ -126,13 +130,13 @@
                   <div class="col-md-5 form-group">
                     <label for="#">Login</label>
                     <div class="form-field">
-                      <input type="text" class="form-control" placeholder="Login">
+                      <input type="{ username }" class="form-control" placeholder="Login">
                     </div>
                   </div>
                   <div class="col-md-5 form-group">
                     <label for="#">Password</label>
                     <div class="form-field">
-                      <input type="text" class="form-control" placeholder="Password">
+                      <input type="{ password }" class="form-control" placeholder="Password">
                     </div>
                   </div>
                 </div>
@@ -140,13 +144,13 @@
                   <div class="col-md-5 form-group">
                     <label for="#">Phone number</label>
                     <div class="form-field">
-                      <input type="text" class="form-control" placeholder="87*********">
+                      <input type="{ phone }" class="form-control" placeholder="87*********">
                     </div>
                   </div>
                   <div class="col-md-5 form-group">
                     <label for="#">e-Mail address</label>
                     <div class="form-field">
-                      <input type="text" class="form-control" placeholder="address0102@gmail.com">
+                      <input type="{ email }" class="form-control" placeholder="address0102@gmail.com">
                     </div>
                   </div>
                 </div>
@@ -155,11 +159,12 @@
           </div>
           <div class="modal-footer">
             <button data-dismiss="modal" class="form-control btn btn-primary">Close</button>
-            <button class="form-control btn btn-primary">Ok</button>
+            <button type="submit" class="form-control btn btn-primary">Ok</button>
           </div>
         </div>
       </div>
     </div>
+    </form>
     {% block content %}
 
     {% endblock %}

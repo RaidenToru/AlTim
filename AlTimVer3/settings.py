@@ -32,6 +32,7 @@ AUTH_USER_MODEL = "Altim.SimpleUser"
 
 INSTALLED_APPS = [
     'Altim',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -109,12 +110,15 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Almaty'
 
+LOGIN_REDIRECT_URL = '/'
+
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
 
+CRISPY_TEMPLATE_PACK = 'uni_form'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
