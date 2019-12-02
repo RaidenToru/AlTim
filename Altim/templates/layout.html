@@ -46,8 +46,13 @@
               </ul>
 
               <div class="dropdown-menu">
+<<<<<<< HEAD
                 <a class="dropdown-item" href="../personal/">Profile</a>
                 <a class="dropdown-item" href="../settings/">Settings</a>
+=======
+                <a class="dropdown-item" href="{% url 'personal' user.id%}">Profile</a>
+                <a class="dropdown-item" href="#">Settings</a>
+>>>>>>> db1f09bc7a6896f6558f7e14562e2285701a49d8
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/logout_view/">Exit</a>
               </div>
