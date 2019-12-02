@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Ticket,Flight,SimpleUser
-from Altim.forms import UserRegistrationForm
-from django.views.generic.edit import CreateView
+from Altim.forms import UserRegistrationForm, UserSettingsForm, settings
+from django.views.generic.edit import CreateView, UpdateView, View
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
@@ -24,11 +24,10 @@ def personal(request):
 def map(request):
     return render(request, 'map.html')
 
-def user(request):
-    b = SimpleUserChangeForm(username='Timka')
-    return b.objects
-
 class registerView(CreateView):
     form_class = UserRegistrationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
+
+def settingsView(request):
+    return settings(request)
