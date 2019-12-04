@@ -8,19 +8,17 @@ from django.http import HttpResponseRedirect
 from Altim.models import SimpleUser
 from django.contrib.auth.decorators import login_required
 
-def logout_view(request):
-    logout(request)
-    return HttpResponseRedirect("/")
-
 
 def index(request):
-    return render(request,'index.html')
+    cities=City.objects.all()
+    return render(request,'index.html',{'cities':cities})
 
 def personal(request, user_id):
     tickets=Ticket.objects.filter(user=SimpleUser.objects.get(pk=user_id))
     flights=Flight.objects.filter(user=SimpleUser.objects.get(pk=user_id))
 
     return render(request, 'personalPage.html',{'tickets':tickets, 'flights':flights})
+
 
 def map(request):
     return render(request,'map.html')
@@ -59,12 +57,35 @@ def settingsView(request):
 
     return render(request, 'settings.html', context)
 
-def get_search_result(request, user_id):
+def personalSearch(request,user_id):
     try:
         if request.method=="POST":
             query=request.POST.get('q')
             flights_result=Flight.objects.filter(flight_name__icontains=query, user=SimpleUser.objects.get(pk=user_id))
             tickets=Ticket.objects.filter(user=SimpleUser.objects.get(pk=user_id))
-            return render(request,'personalSearch.html',{'flights_result':flights_result,'tickets':tickets})
+            flights=Flight.objects.filter(user=SimpleUser.objects.get(pk=user_id))
+            return render(request,'personalSearch.html',{'flights_result':flights_result,'tickets':tickets, 'flights':flights})
     except:
         return render(request,'personalSearch.html')
+
+def search(request):
+    try:
+
+        if request.method=="POST":
+            fromQ=request.POST.get('fromQ')
+            flights_result=Flight.objects.filter(flight_name__icontains=query, user=SimpleUser.objects.get(pk=user_id))
+            tickets=Ticket.objects.filter(user=SimpleUser.objects.get(pk=user_id))
+            flights=Flight.objects.filter(user=SimpleUser.objects.get(pk=user_id))
+            return render(request,'personalSearch.html',{'flights_result':flights_result,'tickets':tickets, 'flights':flights})
+    except:
+        return render(request,'personalSearch.html')
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect("/")
+
+
+class registerView(CreateView):
+    form_class = UserRegistrationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/register.html'
