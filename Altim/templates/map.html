@@ -14,38 +14,22 @@
     </div>
   </div>
 </div>
-<br>
 <section class="ftco-section contact-section ftco-degree-bg">
   <div class="container">
     <div class="row">
-      <iframe class="col-md-8" height="700" src="https://www.flightradar24.com/simple?lat=47.9&lon=67.91&z=4" name="iframe" scrolling="auto"></iframe>
-      <div class="col-md-4 align-items-end">
+      <iframe class="col-md-6" height="500" src="https://www.flightradar24.com/simple?lat=47.9&lon=67.91&z=4" name="iframe" scrolling="auto"></iframe>
+      <div class="col-md-6 input-group row">
         <br>
-        <div class="form-group">
-          <label for="#">Search</label>
-          <div class="form-field">
-            <input type="text" class="form-control" placeholder="by id">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-field">
-            <a href="#myModal2" class="btn btn-primary btn-lg btn-block" data-toggle="modal">Открыть модальное окно</a>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-field">
-            <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-body">
-                    <img src="../static/images/hotel-1.jpg" class="col-md-8"></img>
-                    <p class="col-md-4">Ghbdtn</p>
-                  </div>
-                </div>
-              </div>
+        <form action="/map/result" method="post" class="form-field col-md-12">{% csrf_token %}
+            <label for="#">Search</label>
+            <input name="id" method="post" type="search" class="form-control" placeholder="input id">
+            <br>
+            <div class="input-group-append" class="text-md-center">
+              <button id="button-addon1" type="submit" class="col-md-10 btn btn-primary">Search</button>
             </div>
-          </div>
-        </div>
+        </form>
+        {% block result %}
+        {% endblock %}
       </div>
     </div>
   </div>

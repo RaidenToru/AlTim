@@ -80,6 +80,7 @@ class Migration(migrations.Migration):
             name='Ticket',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('ticket_name', models.CharField(max_length=20)),
                 ('is_two_flight', models.BooleanField()),
                 ('ticket_buy_date', models.DateTimeField(verbose_name='Date when flight was bought')),
                 ('ticket_price', models.IntegerField(default=0, verbose_name='price of ticket')),
