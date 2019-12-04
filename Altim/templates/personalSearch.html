@@ -1,7 +1,10 @@
 {%extends "personalPage.html" %}
 
 {% block result %}
+<div id="div1" class="ftco-animate" style="display:block">
 {% for ticket in tickets|dictsortreversed:"ticket_buy_date" %}
+{% for flight_result in flights_result%}
+{% ifequal flight_result.ticket ticket%}
     <div class="round2 bg-light " style="border:1px solid #e4e7e8">
     <div class="row">
     <div class="col-md-4" style="border-right:1px solid #e4e7e8">
@@ -13,7 +16,7 @@
     </div>
 
     <div class="col-md-8">
-      {% for flight in flights_result%}
+      {% for flight in flights%}
       {%ifequal ticket flight.ticket%}
       <div style="padding:20px 0px 20px 0px">
         <div style="padding-bottom:10px">
@@ -65,5 +68,79 @@
 </div>
 </div>
 <br><br>
+{%endifequal%}
   {% endfor %}
+  {% endfor %}
+</div>
+<div id="div2" class="ftco-animate" style="display:none">
+{% for ticket in tickets|dictsort:"ticket_buy_date" %}
+{% for flight_result in flights_result%}
+{% ifequal flight_result.ticket ticket%}
+    <div class="round2 bg-light " style="border:1px solid #e4e7e8">
+    <div class="row">
+    <div class="col-md-4" style="border-right:1px solid #e4e7e8">
+      <br>
+        <div class="centerPseudo centerFlex" >
+            <input type="submit" value="{{ticket.ticket_price}}₸" class="btn btn-warning " style="border-radius:10px">
+        </div>
+
+    </div>
+
+    <div class="col-md-8">
+      {% for flight in flights%}
+      {%ifequal ticket flight.ticket%}
+      <div style="padding:20px 0px 20px 0px">
+        <div style="padding-bottom:10px">
+        <img width=90px height=auto src="{{flight.flight_aircompany.url}}" alt="">
+      </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-3">
+              <div style="color: rgba(0, 0, 0, 0.8);line-height: 1.5;font-weight: 400;font-size:30px">{{flight.flight_last_time}}</div>
+              <div style="font-size:13px">{{flight.flight_initial_place}}</div>
+              <div style="font-size:13px">{{flight.flight_last_date}}</div>
+            </div>
+            <div class="col-md-6">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-3" style="padding-left:0px">
+              <span><svg width="30" height="30" viewBox="0 0 24 24" fill=orange xmlns="http://www.w3.org/2000/svg" style="transform: rotate(-25deg); ">
+                 <path fill-rule="evenodd" clip-rule="evenodd" d="M17 13H14C12.4577 11.5739 10.1159 9.82474 8.16374 8.01001L6.84295 8C7.60515 9.49106 8.69945 11.4376 9.5 13H6.5C5.54148 12.2794 4.45139 11.6727 3.69008 11.1028C3.27567 10.7932 2.80644 11.0649 3.08297 11.6043C4.38443 14.1509 4.90267 15.176 4.90267 15.176C5.12943 15.6181 5.48619 15.9964 6 16H19.7317C20.7473 15.9659 20.9885 15.3663 21 14.7944C21 13.5 19.5675 13.0196 17 13Z"></path> </span>
+               </div>
+              <div class="col-md-6 text-center">
+                {{flight.flight_time}}
+              </div>
+              <div class="col-md-3">
+                <span><svg width="30" height="30" viewBox="0 0 24 24" fill=orange xmlns="http://www.w3.org/2000/svg" style="transform: rotate(25deg);">
+                   <path fill-rule="evenodd" clip-rule="evenodd" d="M17 13H14C12.4577 11.5739 10.1159 9.82474 8.16374 8.01001L6.84295 8C7.60515 9.49106 8.69945 11.4376 9.5 13H6.5C5.54148 12.2794 4.45139 11.6727 3.69008 11.1028C3.27567 10.7932 2.80644 11.0649 3.08297 11.6043C4.38443 14.1509 4.90267 15.176 4.90267 15.176C5.12943 15.6181 5.48619 15.9964 6 16H19.7317C20.7473 15.9659 20.9885 15.3663 21 14.7944C21 13.5 19.5675 13.0196 17 13Z"></path> </svg></span>
+              </div>
+            </div>
+          </div>
+              <div class="line-long" style="flex-grow:100;display:block"></div>
+              <div class="text-center" style="padding-top:20px">
+                <a href=""><h3 style="font-size:15px;text-decoration:underline">{{flight.flight_name}}</h3></a>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div style="color: rgba(0, 0, 0, 0.8);line-height: 1.5;font-weight: 400;font-size:30px">{{flight.flight_last_time}}</div>
+              <div style="font-size:12px">{{flight.flight_last_place}}</div>
+              <div style="font-size:12px">{{flight.flight_last_date}}</div>
+            </div>
+          </div>
+        </div>
+    </div>
+    {%ifequal flight.ticket.is_two_flight True%}
+    <div style="border-bottom:1px solid #e4e7e8"><p> </p></div>
+    {%endifequal%}
+    {%endifequal%}
+  {% endfor %}
+  </div>
+
+</div>
+</div>
+<br><br>
+{%endifequal%}
+  {% endfor %}
+  {% endfor %}
+</div>
 {% endblock %}
