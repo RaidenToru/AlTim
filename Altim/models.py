@@ -31,7 +31,6 @@ class AirCompany(models.Model):
 
 class Plane(models.Model):
     plane_name=models.CharField(max_length=20)
-    aircompany=models.ForeignKey(AirCompany, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.plane_name

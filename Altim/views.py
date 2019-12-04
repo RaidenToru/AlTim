@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Ticket,Flight,SimpleUser
+from .models import *
 from Altim.forms import UserRegistrationForm, UserSettingsForm, FlightFindByID, UserImageForm
 from django.views.generic.edit import CreateView, UpdateView, View
 from django.urls import reverse, reverse_lazy
