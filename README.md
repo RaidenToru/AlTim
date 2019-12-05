@@ -37,7 +37,7 @@
 
 |**Rakhmetulla Timur**|**Baitas Ali**|**Erkin Kasiet**|
 | :---: |:---:| :---:|
-|[![Rakhmetulla Timur]("https://avatars1.githubusercontent.com/u/57407430?s=460&v=4&s=200")]()|[![Baitas Ali]("https://avatars0.githubusercontent.com/u/57811780?s=460&v=4&s=200")]()|[![Erkin Kasiet]("https://avatars3.githubusercontent.com/u/58031346?s=460&v=4&s=200")]()|
+|[![Rakhmetulla Timur](https://avatars1.githubusercontent.com/u/57407430?s=460&v=4&s=200)]()|[![Baitas Ali](https://avatars0.githubusercontent.com/u/57811780?s=460&v=4&s=200)]()|[![Erkin Kasiet](https://avatars3.githubusercontent.com/u/58031346?s=460&v=4&s=200)]()|
 |*Team leader, Interface designer*|*Web developer*|*System analisys*|
 
 > All of us from `CSSE-1807k`
