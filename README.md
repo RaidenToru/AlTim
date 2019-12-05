@@ -16,14 +16,13 @@
 ## Features
 > We have some features
 
-### Usage
-- Search tickets, that sorting by price
-- In your profile you can look on your tickets, whish have you even bought
+### Search tickets, that sorting by price
+### In your profile you can look on your tickets, whish have you even bought
 
-![Recordit GIF]("http://g.recordit.co/qR3wJMmaK6.gif")
-- On the map you can see this or that flight and find the plane you need
+![Recordit GIF](http://g.recordit.co/qR3wJMmaK6.gif)
+### On the map you can see this or that flight and find the plane you need
 
-![Map]("https://github.com/RaidenToru/AlTim/blob/master/Altim/static/images/map.png&s=500")
+![Map](https://raw.githubusercontent.com/RaidenToru/AlTim/master/Altim/static/images/map.png)
 
 ## Contributing
 
