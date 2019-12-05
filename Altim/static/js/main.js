@@ -318,11 +318,11 @@
 
 
   $('.checkin_date, .checkout_date').datepicker({
-	  'format': 'm/d/yyyy',
+	  'format': 'yyyy-m-d',
 	  'autoclose': true
 	});
 
-  
+
 
 
 })(jQuery);

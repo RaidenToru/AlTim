@@ -1,7 +1,8 @@
-{%extends "layout.html" %}
+{% extends "layout.html" %}
 
 {% block content %}
-    <div class="hero-wrap js-fullheight" style="background-image: url('static/images/backgroundP.jpg');">
+  <!-- Background (picture/Name of page) -->
+    <div class="hero-wrap js-fullheight" style="background-image: url('/static/images/backgroundP.jpg');">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
@@ -12,6 +13,8 @@
       </div>
     </div>
     <br>
+
+    <!-- Search field -->
     <section class="ftco-section justify-content-center ftco-search">
     	<div class="container-wrap ml-auto">
     		<div class="row no-gutters">
@@ -21,110 +24,63 @@
             </div>
           </div>
           <div class="col-md-12 tab-wrap">
-
             <div class="tab-content p-4 px-5" id="v-pills-tabContent">
-
               <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-              	<form action="#" class="search-destination">
+              	<form action="{% url 'search' %}" method="post" class="search-destination">{% csrf_token %}
               		<div class="row">
+
               			<div class="col-md align-items-end">
-              				<div class="form-group">
-              					<label for="#">From</label>
-	              				<div class="form-field">
-                          <div class="select-wrap">
-	              					  <div class="icon"><span class="icon-my_location"></span></div>
-                            <select name="" id="" class="form-control">
-			                      	{% for city in cities %}
-                                <option value="">{{city.city_name}}</option>
-                              {% endfor %}
-			                      </select>
-					              </div>
-				              </div>
-              			</div>
+              				  <div class="form-group" >
+              					  <label for="#">From</label>
+	              				     <div class="form-field">
+                               <div class="select-wrap">
+	              					        <div class="icon"><span class="icon-my_location"></span></div>
+                                    <select class="form-control" name="from" method="POST" placeholder="">
+			                      	         {% for city in cities %}
+                                          <option>{{city.city_name}}</option>
+                                      {% endfor %}
+			                             </select>
+					                   </div>
+				                  </div>
+              			   </div>
                     </div>
+
                     <div class="col-md align-items-end">
               				<div class="form-group">
               					<label for="#">Where</label>
-	              				<div class="form-field">
-                          <div class="select-wrap">
-	              					  <div class="icon"><span class="icon-map-marker"></span></div>
-                            <select name="" id="" class="form-control">
-			                      	{% for city in cities %}
-                                <option value="">{{city.city_name}}</option>
-                              {% endfor %}
-			                      </select>
-					              </div>
-				              </div>
+	              				  <div class="form-field">
+                            <div class="select-wrap">
+	              					    <div class="icon"><span class="icon-map-marker"></span></div>
+                                <select name="where" method="POST" placeholder="" class="form-control">
+			                          	{% for city in cities %}
+                                    <option>{{city.city_name}}</option>
+                                  {% endfor %}
+			                         </select>
+					                  </div>
+				                </div>
               			</div>
+
                     </div>
               			<div class="col-md align-items-end">
               				<div class="form-group">
               					<label for="#">Check In</label>
               					<div class="form-field">
 	              					<div class="icon"><span class="icon-map-marker"></span></div>
-					                <input type="text" class="form-control checkin_date" placeholder="Check In">
+					                <input type="text" class="form-control checkin_date" placeholder="" name="checkin" method="POST">
 					              </div>
 				              </div>
               			</div>
+
               			<div class="col-md align-items-end">
               				<div class="form-group">
               					<label for="#">Check Out</label>
               					<div class="form-field">
 	              					<div class="icon"><span class="icon-map-marker"></span></div>
-					                <input type="text" class="form-control checkout_date" placeholder="From">
+					                <input type="text" class="form-control checkout_date" placeholder="" name="checkin" method="POST">
 					              </div>
 				              </div>
               			</div>
 
-              			<div class="col-md align-self-end">
-              				<div class="form-group">
-              					<div class="form-field">
-					                <input type="submit" value="Search" class="form-control btn btn-primary">
-					              </div>
-				              </div>
-              			</div>
-              		</div>
-              	</form>
-              </div>
-
-              <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-              	<form action="#" class="search-destination">
-              		<div class="row">
-              			<div class="col-md align-items-end">
-              				<div class="form-group">
-              					<label for="#">Check In</label>
-              					<div class="form-field">
-	              					<div class="icon"><span class="icon-map-marker"></span></div>
-					                <input type="text" class="form-control checkin_date" placeholder="Check In">
-					              </div>
-				              </div>
-              			</div>
-              			<div class="col-md align-items-end">
-              				<div class="form-group">
-              					<label for="#">Check Out</label>
-              					<div class="form-field">
-	              					<div class="icon"><span class="icon-map-marker"></span></div>
-					                <input type="text" class="form-control checkout_date" placeholder="From">
-					              </div>
-				              </div>
-              			</div>
-              			<div class="col-md align-items-end">
-              				<div class="form-group">
-              					<label for="#">Guest</label>
-              					<div class="form-field">
-	              					<div class="select-wrap">
-			                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-			                      <select name="" id="" class="form-control">
-			                      	<option value="">1</option>
-			                        <option value="">2</option>
-			                        <option value="">3</option>
-			                        <option value="">4</option>
-			                        <option value="">5</option>
-			                      </select>
-			                    </div>
-					              </div>
-				              </div>
-              			</div>
               			<div class="col-md align-self-end">
               				<div class="form-group">
               					<div class="form-field">
@@ -139,8 +95,10 @@
           </div>
         </div>
     	</div>
-
     </section>
+
+    {% block main %}
+    <!-- About US -->
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
@@ -153,48 +111,29 @@
     	<div class="one-half img" style="background-image: url('static/images/salon.jpg');margin-left:15px;border-radius:8px"></div>
     	<div class="one-half ftco-animate">
         <div>
-  				<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
+  				<p>Our company is created in the likeness of aviasales, but better. Quick search, not to waste time waiting. With our login function, you can always see your flights. And the map will not only help you search for a plane, but you can also have a great time with it. Although our project is not ideal, each time we will try to make it better.</p>
   			</div>
     	</div>
     </section>
 
-    <section class="ftco-section bg-light">
-    	<div class="container">
-    		<div class="row">
-    			<div class="col-md-4">
-    				<div class="intro ftco-animate">
-    					<h3><span>01</span> Travel</h3>
-    					<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-    				</div>
-    			</div>
-    			<div class="col-md-4">
-    				<div class="intro ftco-animate">
-    					<h3><span>02</span> Experience</h3>
-    					<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-    				</div>
-    			</div>
-    			<div class="col-md-4">
-    				<div class="intro ftco-animate">
-    					<h3><span>03</span> Relax</h3>
-    					<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </section>
-
+    <!-- About map -->
 		<section class="ftco-about d-md-flex">
-    	<div class="one-half img" style="background-image: url('static/images/map.png');margin-left:15px;margin-bottom:15  px;border-radius:8px"></div>
-    	<div class="one-half ftco-animate">
+      <div class="one-half ftco-animate">
         <div class="heading-section ftco-animate ">
           <h2 class="mb-4">New aircraft map system</h2>
         </div>
         <div>
-  				<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their. <a href="../map/">Here</a></p>
+  				<p>The new map system will not leave you indifferent, all planes are in full view! With this you can:
+Look at a specific plane;
+View aircraft characteristics (Company, Model, Pilot, Flight Time, etc.);
+Enjoy the flight of aircraft, their flight paths;
+You no longer have to worry so much about your family and friends. <a href="../map/">Here</a></p>
   			</div>
     	</div>
+    	<div class="one-half img" style="background-image: url('static/images/map.png');margin-left:15px;margin-bottom:15  px;border-radius:8px"></div>
     </section>
 
+    <!-- web creators -->
     <section class="ftco-section testimony-section">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
@@ -225,7 +164,7 @@
               </div>
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url('static/images/person_3.jpg')"></span>
+                  <div class="user-img mb-5" style="background-image: url('static/images/person_3.jpg')">
                   </div>
                   <div class="text">
                     <p class="name">Rakhmetulla Timur</p>
@@ -238,4 +177,5 @@
         </div>
       </div>
     </section>
+    {% endblock %}
 {% endblock %}

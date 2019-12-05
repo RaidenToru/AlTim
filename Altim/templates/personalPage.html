@@ -3,6 +3,7 @@
 {% block title %}{{user.first_name}} {{user.last_name}}{% endblock %}
 
 {% block content %}
+    <!-- Background -->
     <div class="hero-wrap js-fullheight" style="background-image: url('/static/images/backgroundP.jpg');">
       <div class="overlay"></div>
       <div class="container">
@@ -15,7 +16,7 @@
     </div>
 
 
-
+    <!-- User's data -->
     <section class="ftco-section bg-light">
       <div class="container">
         <div class="row">
@@ -38,7 +39,7 @@
         </div>
         <div class="col-md-2">
           <div class="intro ftco-animate">
-          <a href="/settings" style="font-size:24px"><span class="icon-settings"></span></a>
+          <a href="{% url 'settings' %}" style="font-size:24px"><span class="icon-settings"></span></a>
         </div>
         </div>
       </div>
@@ -51,6 +52,7 @@
         <div class="row">
         <div class="col-md-1">
         </div>
+        <!-- TICKETS -->
         <div class="col-md-2">
           <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
             <div class="input-group row">
@@ -68,8 +70,9 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-4">
-                <h3 style="text-decoration:underline">YOUR FLIGHTS</h3>
+                <h3 style="text-decoration:underline">Your Tickets</h3>
               </div>
+              <!-- Sorting -->
               <div class="col-md-4">
                 <div class="btn-group ">
                   <ul class="navbar nav ml-auto dropdown-toggle" data-toggle="dropdown">
@@ -90,9 +93,10 @@
             </div>
           </div>
 
-
+          <!-- Tickets -->
           <div class="container-fluid">
             {% block result %}
+            <!-- Sort by Newest -->
             <div id="div1" class="ftco-animate" style="display:block">
             {% for ticket in tickets|dictsortreversed:"ticket_buy_date" %}
                 <div class="round2 bg-light " style="border:1px solid #e4e7e8">
@@ -160,7 +164,8 @@
             <br><br>
               {% endfor %}
               </div>
-              <div id="div2" class="ftco-animate" style="display:none">
+            <!-- Sort by Oldest -->
+            <div id="div2" class="ftco-animate" style="display:none">
               {% for ticket in tickets|dictsort:"ticket_buy_date" %}
                   <div class="round2 bg-light " style="border:1px solid #e4e7e8">
                   <div class="row">
@@ -227,14 +232,10 @@
               <br><br>
                 {% endfor %}
                 </div>
-              {% endblock %}
+            {% endblock %}
         </div>
       </div>
       </div>
-
-
-
-
         <div class="col-md-2">
         </div>
         <div class="col-md-1">

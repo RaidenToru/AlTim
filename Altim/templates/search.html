@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+
+{% block main %}
+  <p>
+    {% if flights %}
+      {% for flight in flights %}
+        {{flight.flight_name}} | {{flight.flight_initial_date}}<br>
+
+        {% endfor %}
+    {% else %}
+      {{empty}}
+    {% endif %}
+  </p>
+{% endblock %}

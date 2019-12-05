@@ -27,8 +27,9 @@
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
   </head>
-  <body>
 
+  <body>
+    <!-- Navigation bar -->
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
 	      <a class="navbar-brand" href="/">AlTim</a>
@@ -46,10 +47,10 @@
               </ul>
 
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="/personal/{{user.id}}">Profile</a>
-                <a class="dropdown-item" href="/settings/">Settings</a>
+                <a class="dropdown-item" href="{% url 'personal' user.id %}">Profile</a>
+                <a class="dropdown-item" href="{% url 'settings' %}">Settings</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/logout_view/">Exit</a>
+                <a class="dropdown-item" href="{% url 'logout_view' %}">Exit</a>
               </div>
             </div>
           </ul>
@@ -67,108 +68,14 @@
         {% endblock  %}
 	    </div>
 	  </nav>
-    <!-- END nav -->
+    <!-- END nav bar -->
 
-    <div id="sign-in" class="modal fade" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" >Sign in/<a href="" data-target="#sign-up" data-dismiss="modal" data-toggle="modal">Sign up</a></h4>
-          </div>
-          <div class="modal-body">
-            <form method="post">
-            <div class="container">
-              <div class="row">
-                {% csrf_token %}
-                <p><div class="col-md-5 form-group">
-                  <label for="id_login">Login</label>
-                  <input required id="id_login" name="username" type="text" class="form-control" placeholder="Login">
-                </div></p>
-                <p><div class="col-md-5 form-group">
-                  <label for="id_password">Password</label>
-                  <input required id="id_password" name="password" type="password" class="form-control" placeholder="Password">
-                </div></p>
-                {{ form.login.errors }}
-                {{ form.password.errors }}
-              </div>
-              <div class="row">
-            <button data-dismiss="modal" class="form-control btn btn-primary col-md-6">Close</button>
-            <button type="submit" class="form-control btn btn-primary col-md-6">Ok</button>
-          </div>
-          </div>
-          </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div id="sign-up" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" >Sign up</h4>
-          </div>
-          <div class="modal-body">
-            <div class="form-field">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-5 form-group">
-                    <label for="#">Name</label>
-                    <div class="form-field">
-                      <input type="{ first_name }" class="form-control" placeholder="Name">
-                    </div>
-                  </div>
-                  <div class="col-md-5 form-group">
-                    <label for="#">Surname</label>
-                    <div class="form-field">
-                      <input type="{ last_name }" class="form-control" placeholder="Surname">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-5 form-group">
-                    <label for="#">Login</label>
-                    <div class="form-field">
-                      <input type="{ username }" class="form-control" placeholder="Login">
-                    </div>
-                  </div>
-                  <div class="col-md-5 form-group">
-                    <label for="#">Password</label>
-                    <div class="form-field">
-                      <input type="{ password }" class="form-control" placeholder="Password">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-5 form-group">
-                    <label for="#">Phone number</label>
-                    <div class="form-field">
-                      <input type="{ phone }" class="form-control" placeholder="87*********">
-                    </div>
-                  </div>
-                  <div class="col-md-5 form-group">
-                    <label for="#">e-Mail address</label>
-                    <div class="form-field">
-                      <input type="{ email }" class="form-control" placeholder="address0102@gmail.com">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button data-dismiss="modal" class="form-control btn btn-primary">Close</button>
-            <button type="submit" class="form-control btn btn-primary">Ok</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    </form>
+
     {% block content %}
 
     {% endblock %}
 
+    <!-- Footer -->
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
         <div class="row mb-5">
@@ -199,7 +106,7 @@
         </div>
       </div>
     </footer>
-
+  <!-- END footer -->
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
