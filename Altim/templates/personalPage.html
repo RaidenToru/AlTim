@@ -47,23 +47,23 @@
     </section>
 
 
-    <section class="ftco-section">
+    <section class="ftco-section" style="background:orange">
       <div class="container-fluid intro ftco-animate">
         <div class="row">
         <div class="col-md-1">
         </div>
         <!-- TICKETS -->
         <div class="col-md-2">
+          <form action="{% url 'personalSearch' user.id%}" method="post"> {% csrf_token %}
           <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
-            <div class="input-group row">
-              <form action="{% url 'personalSearch' user.id%}" method="post"> {% csrf_token %}
+                <div class="input-group">
                 <input name='q' type="search" placeholder="Search" method="POST" class="form-control border-0 bg-light">
                 <div class="input-group-append">
                   <button id="button-addon1" type="submit" class="btn btn-link text-primary"><span class="icon-search"></span></button>
                 </div>
-              </form>
-            </div>
+              </div>
           </div>
+        </form>
         </div>
         <div class="col-md-6">
           <div class="intro ftco-ani  mate">
@@ -106,7 +106,6 @@
                     <div class="centerPseudo centerFlex" >
                         <input type="submit" value="{{ticket.ticket_price}}₸" class="btn btn-warning " style="border-radius:10px">
                     </div>
-
                 </div>
 
                 <div class="col-md-8">

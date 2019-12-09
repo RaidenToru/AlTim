@@ -35,6 +35,9 @@ class Ticket(models.Model):
     user                     =models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     ticket_price             =models.IntegerField('price of ticket',default=0)
 
+    def __str__(self):
+        return self.user.username+"'s ticket"
+
 
 class Flight(models.Model):
     ticket                   =models.ForeignKey(Ticket, on_delete=models.CASCADE,null=True,blank=True)
@@ -53,8 +56,10 @@ class Flight(models.Model):
     flight_price             =models.IntegerField('price of flight')
 
     def __str__(self):
+        if self.user:
+            return self.flight_name+" "+self.user.username
         return self.flight_name
-        
+
 
 class SimpleUser(AbstractUser):
     userImg                  =models.ImageField(upload_to='user_avas/',default='/default/image_6.jpg')

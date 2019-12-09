@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-DATE_INPUT_FORMATS = ['%m/%d/%Y']
+DATE_INPUT_FORMATS = ['%m/%d/%Y','%Y-%m-%d']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

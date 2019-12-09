@@ -6,6 +6,8 @@ urlpatterns = [
     path('',views.index, name='index'),
     #Ticket search results
     path('search/',views.search, name='search'),
+    path('bought/',views.boughtinout, name='boughtinout'),
+    path('bought/',views.boughtin, name='boughtin'),
     #Page with map
     path('map/',views.map, name='map'),
     #Map page with results

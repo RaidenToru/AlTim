@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import *
-from Altim.forms import *
+from .forms import *
 from django.views.generic.edit import CreateView, UpdateView, View
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from Altim.models import SimpleUser
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 #Main page
 def index(request):
@@ -19,14 +20,100 @@ def search(request):
         if request.method=="POST":
             fromq = request.POST.get('from')
             whereq = request.POST.get('where')
-            checkin= request.POST.get('checkin')
+            checkin = request.POST.get('checkin')
             checkout = request.POST.get('checkout')
-            default_date='2000-01-01'
-            flights_template = Flight.objects.filter(flight_initial_place=City.objects.get(city_name__icontains=fromq), flight_last_place=City.objects.get(city_name__icontains=whereq))
-
-            return render(request, 'search.html',{'flights':flights_template,'cities':cities})
+            is_two_flight=False
+            if checkout!='':
+                is_two_flight=True
+            print(checkout)
+            flights_checkin = Flight.objects.filter(flight_initial_place=City.objects.get(city_name__icontains=fromq), flight_last_place=City.objects.get(city_name__icontains=whereq),flight_initial_date__icontains=checkin,user=None)
+            flights_checkout = Flight.objects.filter(flight_initial_place=City.objects.get(city_name__icontains=whereq), flight_last_place=City.objects.get(city_name__icontains=fromq),flight_initial_date__icontains=checkout,user=None)
+            return render(request, 'search.html',{'flights_checkin':flights_checkin,'cities':cities,'flights_checkout':flights_checkout,'is_two_flight':is_two_flight})
     except:
         return render(request,'search.html',{'cities':cities,'empty':"no one"})
+
+
+#Operation to create ticket for user
+def boughtinout(request):
+    try:
+        if request.method=="POST":
+            user_id = request.POST.get('user_id')
+            flightin_id = request.POST.get('flightin_id')
+            flightout_id = request.POST.get('flightout_id')
+            flightin = Flight.objects.get(pk=flightin_id)
+            flightout = Flight.objects.get(pk=flightout_id)
+            ticket = Ticket(
+                    is_two_flight            = True,
+                    user                     = SimpleUser.objects.get(pk=user_id),
+                    ticket_price             = flightin.flight_price+flightout.flight_price,
+                    ticket_buy_date          = timezone.now())
+            ticket.save()
+            flightin_user = Flight(
+                    ticket                   = ticket,
+                    user                     = SimpleUser.objects.get(pk=user_id),
+                    flight_initial_place     = flightin.flight_initial_place,
+                    flight_last_place        = flightin.flight_last_place,
+                    plane                    = flightin.plane,
+                    aircompany               = flightin.aircompany,
+                    flight_name              = flightin.flight_name,
+                    flight_initial_date      = flightin.flight_initial_date,
+                    flight_last_date         = flightin.flight_last_date,
+                    flight_initial_time      = flightin.flight_initial_time,
+                    flight_last_time         = flightin.flight_last_time,
+                    flight_rating            = flightin.flight_rating,
+                    flight_time              = flightin.flight_time,
+                    flight_price             = flightin.flight_price)
+            flightin_user.save()
+            flightout_user = Flight(
+                    ticket                   = ticket,
+                    user                     = SimpleUser.objects.get(pk=user_id),
+                    flight_initial_place     = flightout.flight_initial_place,
+                    flight_last_place        = flightout.flight_last_place,
+                    plane                    = flightout.plane,
+                    aircompany               = flightout.aircompany,
+                    flight_name              = flightout.flight_name,
+                    flight_initial_date      = flightout.flight_initial_date,
+                    flight_last_date         = flightout.flight_last_date,
+                    flight_initial_time      = flightout.flight_initial_time,
+                    flight_last_time         = flightout.flight_last_time,
+                    flight_rating            = flightout.flight_rating,
+                    flight_time              = flightout.flight_time,
+                    flight_price             = flightout.flight_price)
+            flightout_user.save()
+            return render(request,'bought.html',{'success':"Thank you for your purchase"})
+    except:
+        return render(request,'bought.html',{'fail':"Error"})
+
+def boughtin(request):
+    try:
+        user_id = request.POST.get('user_id')
+        flightin_id = request.POST.get('flightin_id')
+        flightin = Flight.objects.get(pk=flightin_id)
+        ticket = Ticket(
+                is_two_flight            = False,
+                user                     = SimpleUser.objects.get(pk=user_id),
+                ticket_price             = flightin.flight_price,
+                ticket_buy_date          = timezone.now())
+        ticket.save()
+        flightin_user = Flight(
+                ticket                   = ticket,
+                user                     = SimpleUser.objects.get(pk=user_id),
+                flight_initial_place     = flightin.flight_initial_place,
+                flight_last_place        = flightin.flight_last_place,
+                plane                    = flightin.plane,
+                aircompany               = flightin.aircompany,
+                flight_name              = flightin.flight_name,
+                flight_initial_date      = flightin.flight_initial_date,
+                flight_last_date         = flightin.flight_last_date,
+                flight_initial_time      = flightin.flight_initial_time,
+                flight_last_time         = flightin.flight_last_time,
+                flight_rating            = flightin.flight_rating,
+                flight_time              = flightin.flight_time,
+                flight_price             = flightin.flight_price)
+        flightin_user.save()
+        return render(request,'bought.html',{'success':"Thank you for your purchase"})
+    except:
+        return render(request,'bought.html',{'fail':"Error"})
 
 
 #Personal user page
