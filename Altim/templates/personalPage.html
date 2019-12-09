@@ -22,7 +22,7 @@
         <div class="row">
         <div class="col-md-5">
       <div class="intro ftco-animate" style="position: relative; overflow:hidden;width:300px;height:300px;">
-          <img src={% if user.userImgs %}{{ user.userImg.url }}{% else %}#{% endif %} alt="" class="rounded-circle mx-auto d-block" style="position: absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px; height:300px;object-fit:cover;">
+          <img src="{% if user.userImg %}{{ user.userImg.url }}{% else %}#{% endif %}" alt="" class="rounded-circle mx-auto d-block" style="position: absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px; height:300px;object-fit:cover;">
         </div>
       </div>
         <div class="col-md-5">
