@@ -26,7 +26,7 @@
           <div class="col-md-12 tab-wrap">
             <div class="tab-content p-4 px-5" id="v-pills-tabContent">
               <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab" >
-              	<form action="{% url 'search' %}" method="post" class="search-destination">{% csrf_token %}
+              	<form action="{% url 'search' %}" method="POST" class="search-destination">{% csrf_token %}
               		<div class="row">
 
               			<div class="col-md align-items-end">
@@ -35,7 +35,7 @@
 	              				     <div class="form-field">
                                <div class="select-wrap">
 	              					        <div class="icon"><span class="icon-my_location"></span></div>
-                                    <select class="form-control" name="from" method="POST" placeholder="">
+                                    <select class="form-control" name="from" method="POST" value="">
 			                      	         {% for city in cities %}
                                           <option>{{city.city_name}}</option>
                                       {% endfor %}
@@ -51,7 +51,7 @@
 	              				  <div class="form-field">
                             <div class="select-wrap">
 	              					    <div class="icon"><span class="icon-map-marker"></span></div>
-                                <select name="where" method="POST" placeholder="" class="form-control">
+                                <select name="where" method="POST" value="" class="form-control">
 			                          	{% for city in cities %}
                                     <option>{{city.city_name}}</option>
                                   {% endfor %}

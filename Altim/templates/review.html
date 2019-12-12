@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="ftco-section" style="background-image: url('/static/images/backgroundP.jpg');">
+  <div class="container-fluid intro ftco-animate">
+    <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <div class="intro ftco-ani  mate">
+        <br><br>
+      <!-- Tickets -->
+      <div class="container-fluid">
+
+        <div class="round2 bg-light " style="border:1px solid #e4e7e8">
+          <div class="row">
+            <div class="col-md-6" style="border-right:1px solid #e4e7e8">
+              <br>
+              <!-- Plane data -->
+                <div class="centerPseudo centerFlex intro ftco-animate">
+                  <img width=150px height=auto src="{{flight.plane.aircompany.company_logo.url}}" alt="">
+                  <h3 style="text-decoration:underline">Plane:</h3>
+                  <font style="font-size:18.72px">{{flight.plane.plane_name}}</font>
+                  <h3 style="text-decoration:underline">Rating:</h3>
+                  <font style="font-size:18.72px">{{flight.plane.plane_rating}}</font>
+                </div>
+                <br>
+            </div>
+            <!-- Plane image -->
+            <div class="col-md-6">
+              <div style="padding:50px 0px 20px 0px">
+                <div class="container-fluid">
+                  <div class="centerPseudo centerFlex intro ftco-animate">
+                  <img width=250px height=auto src="{{flight.plane.plane_img.url}}" alt="">
+                </div>
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+  </div>
+  </div>
+</section>
+
+<!-- Reviewss -->
+<section class="ftco-section" style="background:orange">
+  <div class="container-fluid intro ftco-animate">
+    <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+      <div class="intro ftco-ani  mate">
+
+      <!-- Tickets -->
+      <div class="container-fluid">
+
+        <div class="round2 bg-light " style="border:1px solid #e4e7e8">
+          <div class="row">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-10">
+            <h3 style="text-decoration:underline;padding-top:20px" >REVIEWS </h3>
+            <div style="border-bottom:1px solid #000000"></div>
+            <br>
+          {% if reviews %}
+            {% for review in reviews %}
+            <div class="row">
+              <div class="intro ftco-animate" style="position: relative; overflow:hidden;width:50px;height:50px;">
+                <img src="{% if review.user.userImg %}{{ review.user.userImg.url }}{% else %}#{% endif %}" alt="" class="rounded-circle mx-auto d-block" style="position: absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px; height:50px;object-fit:cover;">
+              </div>
+              <div class="intro ftco-animate">
+                <font style="font-size:25px ;padding-left:10px">{{review.user.first_name}} {{review.user.last_name}} </font>
+                <font style="font-size:20px ;">/ Rating: {{review.rating}}</font>
+              </div>
+            </div>
+            <br>
+            <div class="ftco-animate" style="padding-right:20px">
+              <p>{{review.review_text}}</p>
+            </div>
+            <div style="border-bottom:1px solid #000000"></div><br>
+            {% endfor %}
+          {% else %}
+            <div class="text-center">
+              <h2>NO Review</h2>
+            </div>
+          {% endif %}
+          <br>
+        </div>
+        <div class="col-md-1">
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+  </div>
+  </div>
+  </div>
+</section>
+{% endblock %}

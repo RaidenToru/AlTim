@@ -20,9 +20,9 @@
       <iframe class="col-md-6" height="500" src="https://www.flightradar24.com/simple?lat=47.9&lon=67.91&z=4" name="iframe" scrolling="auto"></iframe>
       <div class="col-md-6 input-group row">
         <br>
-        <form action="/map/result" method="post" class="form-field col-md-12">{% csrf_token %}
+        <form method="post" class="form-field col-md-12">{% csrf_token %}
             <label for="#">Search</label>
-            <input name="id" method="post" type="search" class="form-control" placeholder="input id">
+            <input name="id" method="post" type="search" class="form-control" placeholder="input name of flight">
             <br>
             <div class="input-group-append" class="text-md-center">
               <button id="button-addon1" type="submit" class="col-md-10 btn btn-primary">Search</button>

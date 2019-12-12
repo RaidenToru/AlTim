@@ -24,7 +24,9 @@ class AirCompany(models.Model):
 
 class Plane(models.Model):
     plane_name               =models.CharField(max_length=20)
-
+    plane_rating             =models.FloatField('rating of plane',default=0.0)
+    plane_img                =models.ImageField(upload_to='plane_imgs/',default='default/airplane-silhouette.jpg')
+    aircompany               =models.ForeignKey(AirCompany, on_delete=models.CASCADE,null=True,blank=True)
     def __str__(self):
         return self.plane_name
 
@@ -45,13 +47,11 @@ class Flight(models.Model):
     flight_initial_place     =models.ForeignKey(City, on_delete=models.CASCADE,related_name='flight_initial_place')
     flight_last_place        =models.ForeignKey(City, on_delete=models.CASCADE,related_name='flight_last_place')
     plane                    =models.ForeignKey(Plane, on_delete=models.CASCADE)
-    aircompany               =models.ForeignKey(AirCompany,on_delete=models.CASCADE)
     flight_name              =models.CharField('name of flight',max_length=20)
     flight_initial_date      =models.DateField('date of departure',null=True,blank=True)
     flight_last_date         =models.DateField('date of arrival',null=True,blank=True)
     flight_initial_time      =models.TimeField('time of departure',null=True,blank=True)
     flight_last_time         =models.TimeField('time of arrival',null=True,blank=True)
-    flight_rating            =models.FloatField('rating of flight')
     flight_time              =models.CharField(max_length=20)
     flight_price             =models.IntegerField('price of flight')
 
@@ -62,11 +62,20 @@ class Flight(models.Model):
 
 
 class SimpleUser(AbstractUser):
-    userImg                  =models.ImageField(upload_to='user_avas/',default='/default/image_6.jpg')
+    userImg                  =models.ImageField(upload_to='user_avas/',default='/default/default_user.png')
     phone                    =models.CharField('Phone of user',max_length=20)
     date_of_birth            =models.DateField('date of birth',auto_now=False, auto_now_add=False,null=True,blank=True)
-    group                    =Group()
     user_permissions         =Permission()
+    score                    =models.IntegerField(default=0)
 
     def __str__(self):
         return self.username
+
+class Review(models.Model):
+    user                     =models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True,blank=True)
+    plane                    =models.ForeignKey(Plane, on_delete=models.CASCADE,null=True,blank=True)
+    rating                   =models.FloatField('rating of flight')
+    review_text              =models.TextField()
+
+    def __str__(self):
+        return self.user.username+" review to "+self.plane.plane_name + " of " + self.plane.aircompany.company_name

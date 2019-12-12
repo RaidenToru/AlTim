@@ -6,12 +6,14 @@ urlpatterns = [
     path('',views.index, name='index'),
     #Ticket search results
     path('search/',views.search, name='search'),
-    path('bought/',views.boughtinout, name='boughtinout'),
-    path('bought/',views.boughtin, name='boughtin'),
+    #Message of bought page
+    path('bought/',views.bought, name='bought'),
+    #Reviews page
+    path('review/<int:flight_id>',views.review, name='review'),
+    #Review add Page
+    path('personal/reviewAdd/<int:plane_id>',views.reviewAdd, name='reviewAdd'),
     #Page with map
     path('map/',views.map, name='map'),
-    #Map page with results
-    path('map/result',views.mapResult, name='mapResult'),
     #User's profile settings page
     path('personal/settings/', views.settings, name="settings"),
     #User's profile page

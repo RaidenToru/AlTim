@@ -24,6 +24,17 @@
       <div class="intro ftco-animate" style="position: relative; overflow:hidden;width:300px;height:300px;">
           <img src="{% if user.userImg %}{{ user.userImg.url }}{% else %}#{% endif %}" alt="" class="rounded-circle mx-auto d-block" style="position: absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px; height:300px;object-fit:cover;">
         </div>
+        <h6 style="padding-top:20px">Score: {{user.score}}points</h6>
+            <details aria-hidden="true">
+              <summary>About</summary>
+              <p>
+                2000-4999: 3% discount<br>
+                5000-9999: 5% discount<br>
+                10000-19999: 7% discount<br>
+                More than 20000 10% discount<br>
+                (Ticket with 1 flight - 100points, 2 flight - 200points)
+              </p>
+            </details>
       </div>
         <div class="col-md-5">
               <div class="intro ftco-animate">
@@ -113,14 +124,14 @@
                   {% ifequal ticket flight.ticket %}
                   <div style="padding:20px 0px 20px 0px">
                     <div style="padding-bottom:10px">
-                    <img width=90px height=auto src="{{flight.aircompany.company_logo.url}}" alt="">
+                    <img width=90px height=auto src="{{flight.plane.aircompany.company_logo.url}}" alt="">
                   </div>
                     <div class="container-fluid">
                       <div class="row">
                         <div class="col-md-3">
-                          <div style="color: rgba(0, 0, 0, 0.8);line-height: 1.5;font-weight: 400;font-size:30px">{{flight.flight_last_time}}</div>
+                          <div style="color: rgba(0, 0, 0, 0.8);line-height: 1.5;font-weight: 400;font-size:30px">{{flight.flight_initial_time}}</div>
                           <div style="font-size:13px">{{flight.flight_initial_place}}</div>
-                          <div style="font-size:13px">{{flight.flight_last_date}}</div>
+                          <div style="font-size:13px">{{flight.flight_initial_date}}</div>
                         </div>
                         <div class="col-md-6">
                           <div class="container-fluid">
@@ -140,7 +151,14 @@
                       </div>
                           <div class="line-long" style="flex-grow:100;display:block"></div>
                           <div class="text-center" style="padding-top:20px">
-                            <a href=""><h3 style="font-size:15px;text-decoration:underline">{{flight.flight_name}}</h3></a>
+                            <h3 style="font-size:15px;text-decoration:underline">{{flight.flight_name}}</h3>
+                            <a href="{%url 'reviewAdd' flight.plane.id%}">Add review</a>
+                            <form class="" action="{% url 'review' flight.id%}" method="POST">{% csrf_token %}
+                                <div style="display:none">
+                                  <input type="text" value="{{user.id}}" name="user_id">
+                                </div>
+                                <input type="submit" value="{{flight.plane.plane_rating}}" class="btn btn-warning " style="border-radius:10px">
+                            </form>
                           </div>
                         </div>
                         <div class="col-md-3">
@@ -181,14 +199,14 @@
                     {% ifequal ticket flight.ticket %}
                     <div style="padding:20px 0px 20px 0px">
                       <div style="padding-bottom:10px">
-                      <img width=90px height=auto src="{{flight.aircompany.company_logo.url}}" alt="">
+                      <img width=90px height=auto src="{{flight.plane.aircompany.company_logo.url}}" alt="">
                     </div>
                       <div class="container-fluid">
                         <div class="row">
                           <div class="col-md-3">
-                            <div style="color: rgba(0, 0, 0, 0.8);line-height: 1.5;font-weight: 400;font-size:30px">{{flight.flight_last_time}}</div>
+                            <div style="color: rgba(0, 0, 0, 0.8);line-height: 1.5;font-weight: 400;font-size:30px">{{flight.flight_initial_time}}</div>
                             <div style="font-size:13px">{{flight.flight_initial_place}}</div>
-                            <div style="font-size:13px">{{flight.flight_last_date}}</div>
+                            <div style="font-size:13px">{{flight.flight_initial_date}}</div>
                           </div>
                           <div class="col-md-6">
                             <div class="container-fluid">
@@ -208,7 +226,14 @@
                         </div>
                             <div class="line-long" style="flex-grow:100;display:block"></div>
                             <div class="text-center" style="padding-top:20px">
-                              <a href=""><h3 style="font-size:15px;text-decoration:underline">{{flight.flight_name}}</h3></a>
+                              <h3 style="font-size:15px;text-decoration:underline">{{flight.flight_name}} {{flight.plane.plane_rating}}</h3>
+                              <a href="{%url 'reviewAdd' flight.plane.id%}">Add review</a>
+                              <form class="" action="{% url 'review' flight.id%}" method="POST">{% csrf_token %}
+                                  <div style="display:none">
+                                    <input type="text" value="{{user.id}}" name="user_id">
+                                  </div>
+                                  <input type="submit" value="{{flight.plane.plane_rating}}" class="btn btn-warning " style="border-radius:10px">
+                              </form>
                             </div>
                           </div>
                           <div class="col-md-3">
